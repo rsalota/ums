@@ -1,0 +1,43 @@
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-02-24 21:24:53
+project --topLevelPackage com.real.ums.entitlement
+hint
+jpa setup --database HYPERSONIC_IN_MEMORY --provider HIBERNATE --databaseName umsentitlement 
+entity jpa --class com.real.ums.entitlement.Entitlement
+field number --fieldName serviceId --type java.lang.Long --notNull --comment "ServiceId defines a unique CT subscription service"
+field string --fieldName entitlementKey --unique --comment "The external CT consumer service id for which we will like to provide information"
+field string --fieldName userGuid  --comment "The user guid in UDS and CT system that identifies this user"
+field string --fieldName stermCode  --comment "Defined the terms on whcih the user was offered this service - please this is only for debugging purposes"
+field date --fieldName createDate --type java.util.Date --notNull 
+field date --fieldName effectiveDate --type java.util.Date --notNull 
+embeddable --class ~.EntitlementBillingInfo 
+field number --fieldName billingDate --type java.lang.Long
+field string --fieldName frequency --notNull 
+field number --fieldName quantity --notNull  --type java.lang.Integer
+focus --class ~.Entitlement
+field embedded --fieldName billingInfo --type ~.EntitlementBillingInfo 
+web mvc setup
+controller all --package com.real.ums.entitlement
+json all
+web mvc json all
+// script --file log.roo.x
+exit
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2013-02-24 21:25:11
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-02-24 21:28:58
+exit
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2013-02-24 21:29:19
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-02-24 21:29:54
+json all
+exit
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2013-02-24 21:30:43
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-02-25 10:59:47
+exit
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2013-02-25 10:59:56
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-02-25 11:01:42
+exit
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2013-02-25 11:01:55
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-02-25 11:02:00
+exit
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2013-02-25 11:02:07
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-02-25 11:02:13
+exit
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2013-02-25 11:02:20

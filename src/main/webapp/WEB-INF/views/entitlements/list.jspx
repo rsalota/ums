@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_com_real_ums_entitlement_Entitlement" items="${entitlements}" z="k4GT+754PuvP/vnOAY+7HoyKf6M=">
+        <table:table data="${entitlements}" id="l_com_real_ums_entitlement_Entitlement" path="/entitlements" z="Q3V5B9gsM4BVK65Vb65CXyPRTuM=">
+            <table:column id="c_com_real_ums_entitlement_Entitlement_serviceId" property="serviceId" z="R9BWiK6cAiT4iaXPIsihYxC79gY="/>
+            <table:column id="c_com_real_ums_entitlement_Entitlement_entitlementKey" property="entitlementKey" z="YiSj59ijUxitfX0j4efDutNuQxw="/>
+            <table:column id="c_com_real_ums_entitlement_Entitlement_userGuid" property="userGuid" z="Uw5yFMjyDpVXMXR1iexjsaDCZmw="/>
+            <table:column id="c_com_real_ums_entitlement_Entitlement_stermCode" property="stermCode" z="YjHpzLrYeuzx/xcTlvc9c9emLN8="/>
+            <table:column date="true" dateTimePattern="${entitlement_createdate_date_format}" id="c_com_real_ums_entitlement_Entitlement_createDate" property="createDate" z="1znNDoMouuDIBlSSU9uKt5M695g="/>
+            <table:column date="true" dateTimePattern="${entitlement_effectivedate_date_format}" id="c_com_real_ums_entitlement_Entitlement_effectiveDate" property="effectiveDate" z="BKCAxi4l7z5Rjr/c3Fg/7s7RAzI="/>
+        </table:table>
+    </page:list>
+</div>

@@ -1,0 +1,1 @@
+alias postent='curl -v -s  -X POST -d @ce.json -H "Accept:application/json" -H Content-Type:application/json  http://localhost:8080/entitlement/entitlements'
