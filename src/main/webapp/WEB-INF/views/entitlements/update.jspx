@@ -10,5 +10,6 @@
         <field:datetime dateTimePattern="${entitlement_createdate_date_format}" field="createDate" id="c_com_real_ums_entitlement_Entitlement_createDate" required="true" z="Vsji6qvyoktaFsKVMgGZwJxgZnw="/>
         <field:datetime dateTimePattern="${entitlement_effectivedate_date_format}" field="effectiveDate" id="c_com_real_ums_entitlement_Entitlement_effectiveDate" required="true" z="dfz6LBDDDm6doZkNZCDzHPycH/o="/>
         <field:input field="billingInfo" id="c_com_real_ums_entitlement_Entitlement_billingInfo" z="boP75DwLFhuXeBlIKFiID8fFJEg="/>
+        <field:datetime dateTimePattern="${entitlement_enddate_date_format}" field="endDate" id="c_com_real_ums_entitlement_Entitlement_endDate" z="YlPf1Cj6H+Ujrv0wdok/ActEOXo="/>
     </form:update>
 </div>

@@ -40,4 +40,8 @@ public class Entitlement {
 
     @Embedded
     private EntitlementBillingInfo billingInfo;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @DateTimeFormat(style = "M-")
+    private Date endDate;
 }

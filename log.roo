@@ -41,3 +41,26 @@ exit
 // Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-02-25 11:02:13
 exit
 // Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2013-02-25 11:02:20
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-02-25 12:32:24
+backup 
+exit
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2013-02-25 12:32:39
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-02-25 12:34:23
+exit
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2013-02-25 12:34:54
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-02-25 12:37:11
+exit
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2013-02-25 12:37:23
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-02-25 12:37:42
+json all
+exit
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2013-02-25 12:37:55
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-02-25 12:38:05
+web mvc json all 
+exit
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2013-02-25 12:38:14
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-02-25 12:42:03
+focus --class ~.Entitlement
+field date --fieldName endDate --type java.util.Date
+exit
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2013-02-25 12:42:45

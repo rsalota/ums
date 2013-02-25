@@ -91,6 +91,7 @@ privileged aspect EntitlementController_Roo_Controller {
     void EntitlementController.addDateTimeFormatPatterns(Model uiModel) {
         uiModel.addAttribute("entitlement_createdate_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
         uiModel.addAttribute("entitlement_effectivedate_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
+        uiModel.addAttribute("entitlement_enddate_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
     }
     
     void EntitlementController.populateEditForm(Model uiModel, Entitlement entitlement) {

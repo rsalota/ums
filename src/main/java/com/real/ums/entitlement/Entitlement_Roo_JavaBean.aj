@@ -65,4 +65,12 @@ privileged aspect Entitlement_Roo_JavaBean {
         this.billingInfo = billingInfo;
     }
     
+    public Date Entitlement.getEndDate() {
+        return this.endDate;
+    }
+    
+    public void Entitlement.setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+    
 }
