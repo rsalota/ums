@@ -5,6 +5,7 @@ package com.real.ums.entitlement;
 
 import com.real.ums.entitlement.Entitlement;
 import com.real.ums.entitlement.EntitlementBillingInfo;
+import com.real.ums.entitlement.Status;
 import java.util.Date;
 
 privileged aspect Entitlement_Roo_JavaBean {
@@ -71,6 +72,14 @@ privileged aspect Entitlement_Roo_JavaBean {
     
     public void Entitlement.setEndDate(Date endDate) {
         this.endDate = endDate;
+    }
+    
+    public Status Entitlement.getStatus() {
+        return this.status;
+    }
+    
+    public void Entitlement.setStatus(Status status) {
+        this.status = status;
     }
     
 }

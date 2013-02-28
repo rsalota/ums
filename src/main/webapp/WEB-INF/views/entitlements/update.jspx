@@ -11,5 +11,6 @@
         <field:datetime dateTimePattern="${entitlement_effectivedate_date_format}" field="effectiveDate" id="c_com_real_ums_entitlement_Entitlement_effectiveDate" required="true" z="dfz6LBDDDm6doZkNZCDzHPycH/o="/>
         <field:input field="billingInfo" id="c_com_real_ums_entitlement_Entitlement_billingInfo" z="boP75DwLFhuXeBlIKFiID8fFJEg="/>
         <field:datetime dateTimePattern="${entitlement_enddate_date_format}" field="endDate" id="c_com_real_ums_entitlement_Entitlement_endDate" z="YlPf1Cj6H+Ujrv0wdok/ActEOXo="/>
+        <field:select field="status" id="c_com_real_ums_entitlement_Entitlement_status" items="${statuses}" path="statuses" z="C+Vmzm1P/QOGUbp6ZyBW4hIKa8Q="/>
     </form:update>
 </div>

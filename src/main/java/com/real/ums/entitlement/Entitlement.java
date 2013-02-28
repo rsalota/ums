@@ -3,6 +3,7 @@ package com.real.ums.entitlement;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
+import javax.persistence.Enumerated;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
@@ -44,4 +45,7 @@ public class Entitlement {
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(style = "M-")
     private Date endDate;
+
+    @Enumerated
+    private Status status;
 }

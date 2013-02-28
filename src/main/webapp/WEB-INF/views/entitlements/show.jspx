@@ -11,5 +11,6 @@
         <field:display date="true" dateTimePattern="${entitlement_effectivedate_date_format}" field="effectiveDate" id="s_com_real_ums_entitlement_Entitlement_effectiveDate" object="${entitlement}" z="PbeITTI+wVXaTbFau5EkPGUzIZ4="/>
         <field:display field="billingInfo" id="s_com_real_ums_entitlement_Entitlement_billingInfo" object="${entitlement}" z="Dof7IPtPfU1IUyjnukb07+UhI1U="/>
         <field:display date="true" dateTimePattern="${entitlement_enddate_date_format}" field="endDate" id="s_com_real_ums_entitlement_Entitlement_endDate" object="${entitlement}" z="sf74jA0rJWSz+ghCuP3sHMcWtyA="/>
+        <field:display field="status" id="s_com_real_ums_entitlement_Entitlement_status" object="${entitlement}" z="4SoOEQCGfjoUYVIqVYDHVOapXYs="/>
     </page:show>
 </div>

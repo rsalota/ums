@@ -5,7 +5,9 @@ package com.real.ums.entitlement;
 
 import com.real.ums.entitlement.Entitlement;
 import com.real.ums.entitlement.EntitlementController;
+import com.real.ums.entitlement.Status;
 import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import org.joda.time.format.DateTimeFormat;
@@ -97,6 +99,7 @@ privileged aspect EntitlementController_Roo_Controller {
     void EntitlementController.populateEditForm(Model uiModel, Entitlement entitlement) {
         uiModel.addAttribute("entitlement", entitlement);
         addDateTimeFormatPatterns(uiModel);
+        uiModel.addAttribute("statuses", Arrays.asList(Status.values()));
     }
     
     String EntitlementController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {
