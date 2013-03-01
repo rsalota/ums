@@ -15,8 +15,8 @@ import org.springframework.roo.addon.tostring.RooToString;
 
 @RooJavaBean
 @RooToString
-@RooJpaActiveRecord
 @RooJson
+@RooJpaActiveRecord(finders = { "findEntitlementsByEntitlementKeyEquals" })
 public class Entitlement {
 
     @NotNull
@@ -48,4 +48,7 @@ public class Entitlement {
 
     @Enumerated
     private Status status;
+
+    @Enumerated
+    private CancelReason cancelReason;
 }

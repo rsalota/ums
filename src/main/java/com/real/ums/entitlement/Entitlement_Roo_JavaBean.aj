@@ -3,6 +3,7 @@
 
 package com.real.ums.entitlement;
 
+import com.real.ums.entitlement.CancelReason;
 import com.real.ums.entitlement.Entitlement;
 import com.real.ums.entitlement.EntitlementBillingInfo;
 import com.real.ums.entitlement.Status;
@@ -80,6 +81,14 @@ privileged aspect Entitlement_Roo_JavaBean {
     
     public void Entitlement.setStatus(Status status) {
         this.status = status;
+    }
+    
+    public CancelReason Entitlement.getCancelReason() {
+        return this.cancelReason;
+    }
+    
+    public void Entitlement.setCancelReason(CancelReason cancelReason) {
+        this.cancelReason = cancelReason;
     }
     
 }

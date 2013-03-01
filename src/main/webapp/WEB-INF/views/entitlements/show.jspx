@@ -12,5 +12,6 @@
         <field:display field="billingInfo" id="s_com_real_ums_entitlement_Entitlement_billingInfo" object="${entitlement}" z="Dof7IPtPfU1IUyjnukb07+UhI1U="/>
         <field:display date="true" dateTimePattern="${entitlement_enddate_date_format}" field="endDate" id="s_com_real_ums_entitlement_Entitlement_endDate" object="${entitlement}" z="sf74jA0rJWSz+ghCuP3sHMcWtyA="/>
         <field:display field="status" id="s_com_real_ums_entitlement_Entitlement_status" object="${entitlement}" z="4SoOEQCGfjoUYVIqVYDHVOapXYs="/>
+        <field:display field="cancelReason" id="s_com_real_ums_entitlement_Entitlement_cancelReason" object="${entitlement}" z="BiCs/O3x5lAMGmyH6/B2a5GKVrk="/>
     </page:show>
 </div>

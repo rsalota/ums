@@ -3,6 +3,7 @@
 
 package com.real.ums.entitlement;
 
+import com.real.ums.entitlement.CancelReason;
 import com.real.ums.entitlement.Entitlement;
 import com.real.ums.entitlement.EntitlementController;
 import com.real.ums.entitlement.Status;
@@ -99,6 +100,7 @@ privileged aspect EntitlementController_Roo_Controller {
     void EntitlementController.populateEditForm(Model uiModel, Entitlement entitlement) {
         uiModel.addAttribute("entitlement", entitlement);
         addDateTimeFormatPatterns(uiModel);
+        uiModel.addAttribute("cancelreasons", Arrays.asList(CancelReason.values()));
         uiModel.addAttribute("statuses", Arrays.asList(Status.values()));
     }
     

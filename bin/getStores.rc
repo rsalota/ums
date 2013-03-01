@@ -1,8 +1,0 @@
-alias getAmazonStores='curl http://redratesapi.elasticbeanstalk.com/stores/active/98065/10 -H "Accept: application/json"'
-alias getApiStores='curl http://api.redrates.com/stores/active/98065/10 -H "Accept: application/json"'
-alias getStoresByApache='curl -i  http://localhost/redrates/stores/active/98065/10 -H "Accept: application/json"'
-alias getStoresByTom='curl -i  http://localhost:8080/redrates/stores/active/98065/40 -H "Accept: application/json"'
-alias getAmazonStoresLonLat='curl http://redratesapi.elasticbeanstalk.com/stores/active/31.466114/-34.484749/10 -H "Accept: application/json"'
-alias getApiStores='curl http://api.redrates.com/stores/active/31.466114/34.484749/10 -H "Accept: application/json"'
-alias getStoresByApache='curl -i  http://localhost/redrates/stores/active/065/10 -H "Accept: application/json"'
-alias getStoresByTom='curl -i  http://localhost:8080/redrates/stores/active/98065/10 -H "Accept: application/json"'
