@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class EntitlementController {
 	private static Logger log = Logger.getLogger(EntitlementController.class);
 
-	@RequestMapping(value = "/cancel/{entitlementKey}", method = RequestMethod.PUT, headers = "Accept=application/json")
+	@RequestMapping(value = "/entitlementkey/cancel/{entitlementKey}", method = RequestMethod.PUT, headers = "Accept=application/json")
 	public ResponseEntity<String> cancel(
 			@PathVariable("entitlementKey") String entitlementKey,
 			@RequestBody String json) {
@@ -70,6 +70,7 @@ public class EntitlementController {
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Content-Type", "application/json");
 		List<Entitlement> entitlements = checkEntitlementKey(entitlementKey);
+		
 		if (entitlements.size() == 1) {
 			return new ResponseEntity<String>(headers, HttpStatus.OK);
 		}
