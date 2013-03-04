@@ -1,0 +1,6 @@
+alias postent='curl -v -s  -X PUT -d @ce.json -H "Accept:application/json" -H Content-Type:application/json  http://localhost:8080/entitlement/entitlements/entitlementkey/121312121'
+alias getent='curl -v -s  -X GET -H "Accept:application/json" -H Content-Type:application/json  http://localhost:8080/entitlement/entitlements'
+alias putent='curl -v -s  -X PUT -d @cce.json -H "Accept:application/json" -H Content-Type:application/json  http://localhost:8080/entitlement/entitlements/entitlementkey/cancel/121312121'
+alias awspostent='curl -v -s  -X PUT -d @ce.json -H "Accept:application/json" -H Content-Type:application/json  http://devumssim.elasticbeanstalk.com/entitlements/entitlementkey/121312121'
+alias awsgetent='curl -v -s  -X GET -H "Accept:application/json" -H Content-Type:application/json  http://devumssim.elasticbeanstalk.com/entitlements'
+alias awsputent='curl -v -s  -X PUT -d @cce.json -H "Accept:application/json" -H Content-Type:application/json  http://devumssim.elasticbeanstalk.com/entitlements/entitlementkey/cancel/121312121'
