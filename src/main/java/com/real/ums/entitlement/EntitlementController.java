@@ -89,16 +89,22 @@ public class EntitlementController {
 	
 	@RequestMapping(value = "/entitlementkey/{entitlementKey}", method = RequestMethod.GET, headers = "Accept=application/json")
 	public @ResponseBody ResponseEntity<String> findByEntitlementKey(
-			@PathVariable("entitlementKey") String entitlementKey,
-			@RequestBody String json) {
+			@PathVariable("entitlementKey") String entitlementKey) {
+		log.info("Entitlement key requested " + entitlementKey);
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Content-Type", "application/json");
-		List<Entitlement> entitlements = checkEntitlementKey(entitlementKey);
-		
-		if (entitlements.size() == 1) {
-			return new ResponseEntity<String>(Entitlement.toJsonArray(entitlements),headers,HttpStatus.OK);
+		if (entitlementKey == null || entitlementKey.isEmpty()){
+			log.info("Entitlement key is not present return bad request");
+			return new ResponseEntity<String>(headers,HttpStatus.BAD_REQUEST);
 		}
-		return new ResponseEntity<String>(headers,HttpStatus.INTERNAL_SERVER_ERROR);
+		
+		List<Entitlement> entitlements = checkEntitlementKey(entitlementKey);
+		if (entitlements != null && entitlements.size() == 1) {
+			return new ResponseEntity<String>(Entitlement.toJsonArray(entitlements),headers,HttpStatus.OK);
+		}else if (entitlements !=null && entitlements.size() > 1){
+			return new ResponseEntity<String>(headers,HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return new ResponseEntity<String>(headers,HttpStatus.NOT_FOUND);
 	}
 
 	private List<Entitlement> checkEntitlementKey(String entitlementKey) {
