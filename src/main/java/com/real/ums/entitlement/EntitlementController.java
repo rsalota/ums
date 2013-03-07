@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @RequestMapping("/entitlements")
 @Controller
@@ -84,6 +85,20 @@ public class EntitlementController {
 		}
 		
 		return new ResponseEntity<String>(headers, HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+	
+	@RequestMapping(value = "/entitlementkey/{entitlementKey}", method = RequestMethod.GET, headers = "Accept=application/json")
+	public @ResponseBody ResponseEntity<String> findByEntitlementKey(
+			@PathVariable("entitlementKey") String entitlementKey,
+			@RequestBody String json) {
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Content-Type", "application/json");
+		List<Entitlement> entitlements = checkEntitlementKey(entitlementKey);
+		
+		if (entitlements.size() == 1) {
+			return new ResponseEntity<String>(Entitlement.toJsonArray(entitlements),headers,HttpStatus.OK);
+		}
+		return new ResponseEntity<String>(headers,HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
 	private List<Entitlement> checkEntitlementKey(String entitlementKey) {
