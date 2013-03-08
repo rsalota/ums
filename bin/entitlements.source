@@ -1,8 +1,14 @@
-alias postent='curl -v -s  -X PUT -d @ce.json -H "Accept:application/json" -H Content-Type:application/json  http://localhost:8080/entitlement/entitlements/entitlementkey/121312121'
+alias newent='curl -v -s  -X PUT -d @ce.json -H "Accept:application/json" -H Content-Type:application/json  http://localhost:8080/entitlement/entitlements/entitlementkey/121312121'
 alias getent='curl -v -s  -X GET -H "Accept:application/json" -H Content-Type:application/json  http://localhost:8080/entitlement/entitlements'
-alias putent='curl -v -s  -X PUT -d @cce.json -H "Accept:application/json" -H Content-Type:application/json  http://localhost:8080/entitlement/entitlements/entitlementkey/cancel/121312121'
+alias cancelent='curl -v -s  -X PUT -d @cce.json -H "Accept:application/json" -H Content-Type:application/json  http://localhost:8080/entitlement/entitlements/entitlementkey/cancel/121312121'
 alias getentByKey='curl -v -s  -X GET -H "Accept:application/json" -H Content-Type:application/json  http://localhost:8080/entitlement/entitlements/entitlementkey/121312121'
-alias awspostent='curl -v -s  -X PUT -d @ce.json -H "Accept:application/json" -H Content-Type:application/json  http://devumssim.elasticbeanstalk.com/entitlements/entitlementkey/121312121'
+
+alias awsnewent='curl -v -s  -X PUT -d @ce.json -H "Accept:application/json" -H Content-Type:application/json  http://devumssim.elasticbeanstalk.com/entitlements/entitlementkey/121312121'
 alias awsgetent='curl -v -s  -X GET -H "Accept:application/json" -H Content-Type:application/json  http://devumssim.elasticbeanstalk.com/entitlements'
 alias awsgetentByKey='curl -v -s  -X GET -H "Accept:application/json" -H Content-Type:application/json  http://devumssim.elasticbeanstalk.com/entitlements/entitlementkey/121312121'
-alias awsputent='curl -v -s  -X PUT -d @cce.json -H "Accept:application/json" -H Content-Type:application/json  http://devumssim.elasticbeanstalk.com/entitlements/entitlementkey/cancel/121312121'
+alias awscancelent='curl -v -s  -X PUT -d @cce.json -H "Accept:application/json" -H Content-Type:application/json  http://devumssim.elasticbeanstalk.com/entitlements/entitlementkey/cancel/121312121'
+
+#negative tests for bad requests : should give back 400
+alias testpostent='curl -v -s  -X PUT -d @test.json -H "Accept:application/json" -H Content-Type:application/json  http://localhost:8080/entitlement/entitlements/entitlementkey/115002239'
+alias testcancelent='curl -v -s  -X PUT -d @test.json -H "Accept:application/json" -H Content-Type:application/json  http://localhost:8080/entitlement/entitlements/entitlementkey/cancel/115002239'
+alias awstestpostent='curl -v -s  -X PUT -d @test.json -H "Accept:application/json" -H Content-Type:application/json  http://devumssim.elasticbeanstalk.com/entitlements/entitlementkey/115002239'

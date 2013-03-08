@@ -1,5 +1,7 @@
 package com.real.ums.entitlement;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -30,21 +32,16 @@ public class EntitlementController {
 			@RequestBody String json) {
 		log.info("Cancel the entitlement" + entitlementKey + " " + json);
 		HttpHeaders headers = new HttpHeaders();
-		headers.add("Content-Type", "application/json");
-		validateEntitlementKey(entitlementKey);
-		List<Entitlement> entitlements = checkEntitlementKey(entitlementKey);
-		if (entitlements != null && entitlements.size() == 1) {
-			Entitlement entitlement = entitlements.get(0);
-			CancelEntitlement cancelEntitlement = CancelEntitlement
-					.fromJsonToCancelEntitlement(json);
-			if (cancelEntitlement == null
-					|| cancelEntitlement.getCancelReason() == null
-					|| cancelEntitlement.getStatus() == null) {
-				throw new IllegalArgumentException(
-						"Cannot have cancel reason or status as null"
-								+ cancelEntitlement.toString());
-			}
 
+		try {
+			headers.add("Content-Type", "application/json");
+			List<Entitlement> entitlements = checkEntitlementKey(entitlementKey);
+			if (entitlements == null || entitlements.size() != 1) {
+				throw new IllegalArgumentException(
+						"We were not able to find the entitlement to cancel");
+			}
+			Entitlement entitlement = entitlements.get(0);
+			CancelEntitlement cancelEntitlement = validateAndBuildCancelEntitlement(json);
 			log.info("Cancel the entitlement" + entitlementKey + " "
 					+ cancelEntitlement.getCancelReason());
 			entitlement.setCancelReason(CancelReason.valueOf(cancelEntitlement
@@ -53,14 +50,14 @@ public class EntitlementController {
 					.setStatus(Status.valueOf(cancelEntitlement.getStatus()));
 			entitlement.merge();
 			return new ResponseEntity<String>(headers, HttpStatus.OK);
-		}
-		return new ResponseEntity<String>(headers, HttpStatus.BAD_REQUEST);
-	}
-
-	private void validateEntitlementKey(String entitlementKey) {
-		if (entitlementKey == null || entitlementKey.isEmpty()) {
-			throw new IllegalArgumentException(
-					"Entitlement key cannot be empty or NULL");
+		} catch (IllegalArgumentException e) {
+			return new ResponseEntity<String>(headers, HttpStatus.BAD_REQUEST);
+		} catch (Exception e) {
+			headers.add("Content-Type", "application/text");
+			PrintWriter printWriter = new PrintWriter(new StringWriter());
+			e.printStackTrace(printWriter);
+			return new ResponseEntity<String>(printWriter.toString(), headers,
+					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
@@ -70,48 +67,96 @@ public class EntitlementController {
 			@RequestBody String json) {
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Content-Type", "application/json");
-		List<Entitlement> entitlements = checkEntitlementKey(entitlementKey);
-		
-		if (entitlements.size() == 1) {
-			return new ResponseEntity<String>(headers, HttpStatus.OK);
-		}
-
-		if (entitlements.size() == 0) {
-			Entitlement entitlement = Entitlement.fromJsonToEntitlement(json);
-			if (entitlement.merge() == null) {
-				return new ResponseEntity<String>(headers, HttpStatus.INTERNAL_SERVER_ERROR);
+		try {
+			List<Entitlement> entitlements = checkEntitlementKey(entitlementKey);
+			Entitlement entitlement = validateAndBuildEntitlement(json);
+			
+			if (entitlements.size() == 1) {
+				return new ResponseEntity<String>(headers, HttpStatus.OK);
 			}
-			return new ResponseEntity<String>(headers, HttpStatus.OK);
+
+			if (entitlement.merge() != null) {
+				return new ResponseEntity<String>(headers, HttpStatus.OK);
+			} else {
+				throw new Exception("We were not able to store your change due to internal error");
+			}
+		} catch (IllegalArgumentException e) {
+			return new ResponseEntity<String>(headers, HttpStatus.BAD_REQUEST);
+		} catch (Exception e) {
+			return new ResponseEntity<String>(headers,
+					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		
-		return new ResponseEntity<String>(headers, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
-	
+
 	@RequestMapping(value = "/entitlementkey/{entitlementKey}", method = RequestMethod.GET, headers = "Accept=application/json")
-	public @ResponseBody ResponseEntity<String> findByEntitlementKey(
+	public @ResponseBody
+	ResponseEntity<String> findByEntitlementKey(
 			@PathVariable("entitlementKey") String entitlementKey) {
 		log.info("Entitlement key requested " + entitlementKey);
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Content-Type", "application/json");
-		if (entitlementKey == null || entitlementKey.isEmpty()){
+		if (entitlementKey == null || entitlementKey.isEmpty()) {
 			log.info("Entitlement key is not present return bad request");
-			return new ResponseEntity<String>(headers,HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<String>(headers, HttpStatus.BAD_REQUEST);
 		}
-		
+
 		List<Entitlement> entitlements = checkEntitlementKey(entitlementKey);
 		if (entitlements != null && entitlements.size() == 1) {
-			return new ResponseEntity<String>(Entitlement.toJsonArray(entitlements),headers,HttpStatus.OK);
-		}else if (entitlements !=null && entitlements.size() > 1){
-			return new ResponseEntity<String>(headers,HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<String>(
+					Entitlement.toJsonArray(entitlements), headers,
+					HttpStatus.OK);
+		} else if (entitlements != null && entitlements.size() > 1) {
+			return new ResponseEntity<String>(headers,
+					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		return new ResponseEntity<String>(headers,HttpStatus.NOT_FOUND);
+		return new ResponseEntity<String>(headers, HttpStatus.NOT_FOUND);
+	}
+	
+	private Entitlement validateAndBuildEntitlement(String json) {
+		if (json == null || json.length() == 0) {
+			throw new IllegalArgumentException("Bad json");
+		}
+		try {
+			Entitlement entitlement = Entitlement.fromJsonToEntitlement(json);
+			return entitlement;
+		} catch (Exception e) {
+			throw new IllegalArgumentException("Bad json");
+		}
 	}
 
+
+
 	private List<Entitlement> checkEntitlementKey(String entitlementKey) {
+		validateEntitlementKey(entitlementKey);
 		List<Entitlement> entitlements = Entitlement
 				.findEntitlementsByEntitlementKeyEquals(entitlementKey)
 				.getResultList();
 		return entitlements;
+	}
+
+	private CancelEntitlement validateAndBuildCancelEntitlement(String json) {
+		try {
+			CancelEntitlement cancelEntitlement = CancelEntitlement
+					.fromJsonToCancelEntitlement(json);
+			if (cancelEntitlement == null
+					|| cancelEntitlement.getCancelReason() == null
+					|| cancelEntitlement.getStatus() == null) {
+				throw new IllegalArgumentException(
+						"Cannot have cancel reason or status as null"
+								+ cancelEntitlement.toString());
+			}
+			return cancelEntitlement;
+
+		} catch (Exception e) {
+			throw new IllegalArgumentException(e);
+		}
+	}
+
+	private void validateEntitlementKey(String entitlementKey) {
+		if (entitlementKey == null || entitlementKey.isEmpty()) {
+			throw new IllegalArgumentException(
+					"Entitlement key cannot be empty or NULL");
+		}
 	}
 
 }
